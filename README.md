@@ -1,6 +1,6 @@
 # Orbinuity Website
 
-[<img alt="Status" src="https://raw.githubusercontent.com/Orbinuity/.github/main/status/not_done.png" width="100" height="25">](https://orbinuity.github.io/statusIcons)
+[<img alt="Status" src="https://raw.githubusercontent.com/Orbinuity/.github/main/status/stable.png" width="100" height="25">](https://orbinuity.github.io/statusIcons)
 
 The Orbinuity site
 
