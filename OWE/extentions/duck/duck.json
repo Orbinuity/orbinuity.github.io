@@ -1,0 +1,8 @@
+{
+    "name": "Duck",
+    "extension": {
+        "on_any_key": {
+            "sound": "quack.mp3"
+        }
+    }
+}
