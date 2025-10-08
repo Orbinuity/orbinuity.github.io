@@ -1,0 +1,8 @@
+{
+    "name": "Test",
+    "extension": {
+        "on_any_key": {
+            "sound": "fart.mp3"
+        }
+    }
+}
