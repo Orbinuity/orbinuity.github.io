@@ -147,8 +147,8 @@
     <section id="home">
         <h2>Popular extensions</h2>
         <div class="card">
-            <button onclick="SetExtension('test');">Use Test Extension</button>
-            <button onclick="SetExtension('duck');">Use Duck Extension</button>
+            <button onclick="toggleExtension('test')" id="ext-test">Test Extension</button>
+            <button onclick="toggleExtension('duck')" id="ext-duck">Duck Extension</button>
         </div>
     </section>
 </main>
@@ -158,11 +158,61 @@
 </footer>
 
 <script>
-    function SetExtension(extensionName) {
-        const date = new Date();
-        date.setFullYear(2038);
-        document.cookie = "proj.OWE.Extension=" + encodeURIComponent(extensionName) + "; expires=" + date.toUTCString() + "; path=/";
+    function getCookie(name) {
+        const cookies = document.cookie.split("; ");
+        for (const cookie of cookies) {
+            const [key, value] = cookie.split("=");
+            if (key === name) return decodeURIComponent(value);
+        }
+        return null;
     }
+
+    function setCookie(name, value, years = 10) {
+        const date = new Date();
+        date.setFullYear(date.getFullYear() + years);
+        document.cookie = `${name}=${encodeURIComponent(value)}; expires=${date.toUTCString()}; path=/`;
+    }
+
+    function getExtensions() {
+        const cookie = getCookie("proj.OWE.Extension");
+        if (!cookie) return [];
+        try {
+            const parsed = JSON.parse(cookie);
+            return Array.isArray(parsed) ? parsed : [];
+        } catch {
+            return [];
+        }
+    }
+
+    function saveExtensions(list) {
+        setCookie("proj.OWE.Extension", JSON.stringify(list));
+    }
+
+    function toggleExtension(name) {
+        const list = getExtensions();
+        const index = list.indexOf(name);
+
+        if (index === -1) {
+            list.push(name);
+            alert(`Added ${name} extension!`);
+        } else {
+            list.splice(index, 1);
+            alert(`Removed ${name} extension!`);
+        }
+
+        saveExtensions(list);
+        updateButtons();
+    }
+
+    function updateButtons() {
+        const active = getExtensions();
+        document.querySelectorAll("button[id^='ext-']").forEach(btn => {
+            const extName = btn.id.replace("ext-", "");
+            btn.classList.toggle("active", active.includes(extName));
+        });
+    }
+
+    updateButtons();
 </script>
 
 </body>
