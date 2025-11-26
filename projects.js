@@ -1,4 +1,4 @@
-fetch('/htmls/')
+fetch('/project/')
     .then(res => res.text())
     .then(html => {
         const parser = new DOMParser();
