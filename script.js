@@ -1,6 +1,6 @@
-const scriptTag = document.currentScript;
+const header = document.getElementById('header');
 
-const userName = scriptTag.dataset.id;
+const userName = header.dataset.id;
 
 fetch('nogo/header.html')
     .then(response => response.text())
