@@ -5,9 +5,10 @@ fetch('nogo/header.html')
 
         const links = document.querySelectorAll('nav a');
         const currentPath = window.location.pathname;
+        print(currentPath)
         links.forEach(link => {
             if(link.getAttribute('href') === currentPath) {
-                link.classList.add('active');
+                link.style.textDecoration = 'underline';
             }
         });
     });
