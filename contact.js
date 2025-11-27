@@ -1,6 +1,9 @@
 const script = document.currentScript;
 
 const mail = script.dataset.mail;
+const sub = script.dataset.sub;
+const prt = script.dataset.prt;
+const ms = script.dataset.ms;
 
 function sendEmail(event) {
     event.preventDefault();
@@ -13,11 +16,11 @@ function sendEmail(event) {
         return;
     }
     
-    alert("Thank you for messaging us, " + name + "! Your email app will now open.");
+    alert(ms.replace("&(name)", name));
     
-    const subject = encodeURIComponent(`${name} has a question!`);
-    const body = encodeURIComponent(message);
-    const mailto = `mailto:${mail}?subject=${subject}&body=Hello%20Orbinuity%2C%0A%0A${body}%0A%0AWith%20kind%20regards%2C%0A${encodeURIComponent(name)}`;
+    const subject = encodeURIComponent(sub.replace("&(name)", name));
+    const body = encodeURIComponent(prt.replace("&(body)", message).replace("&(name)", name));
+    const mailto = `mailto:${mail}?subject=${subject}&body=${body}}`;
     
     window.location.href = mailto;
 }
