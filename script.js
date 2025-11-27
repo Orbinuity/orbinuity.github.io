@@ -14,3 +14,9 @@ fetch('/nogo/header.html')
             }
         });
     });
+
+fetch('/nogo/footer.html')
+    .then(response => response.text())
+    .then(html => {
+        document.getElementById('footer').innerHTML = html;
+    });
