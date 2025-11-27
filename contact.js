@@ -1,3 +1,7 @@
+const script = document.currentScript;
+
+const mail = script.dataset.mail;
+
 function sendEmail(event) {
     event.preventDefault();
     
@@ -13,7 +17,7 @@ function sendEmail(event) {
     
     const subject = encodeURIComponent(`${name} has a question!`);
     const body = encodeURIComponent(message);
-    const mailto = `mailto:orbinuity@ratgers.nl?subject=${subject}&body=Hello%20Orbinuity%2C%0A%0A${body}%0A%0AWith%20kind%20regards%2C%0A${encodeURIComponent(name)}`;
+    const mailto = `mailto:${mail}?subject=${subject}&body=Hello%20Orbinuity%2C%0A%0A${body}%0A%0AWith%20kind%20regards%2C%0A${encodeURIComponent(name)}`;
     
     window.location.href = mailto;
 }
