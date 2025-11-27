@@ -4,7 +4,7 @@ fetch('/nogo/projects.json')
         const cardList = document.getElementById('project-list');
         projects.forEach(project => {
             const button = document.createElement('button');
-            button.addEventListener("onclick", () => {
+            button.addEventListener("click", () => {
                 window.location.href = `/project/${project[0]}`;
             });
             button.textContent = project[1];
