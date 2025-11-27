@@ -20,7 +20,7 @@ function sendEmail(event) {
     
     const subject = encodeURIComponent(sub.replace("&(name)", name));
     const body = encodeURIComponent(prt.replace("&(body)", message).replace("&(name)", name));
-    const mailto = `mailto:${mail}?subject=${subject}&body=${body}}`;
+    const mailto = `mailto:${mail}?subject=${subject}&body=${body}`;
     
     window.location.href = mailto;
 }
