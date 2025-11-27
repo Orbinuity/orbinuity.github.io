@@ -1,13 +1,13 @@
-fetch('/project/files.json')
+fetch('/nogo/projects.json')
     .then(res => res.json())
-    .then(files => {
+    .then(projects => {
         const cardList = document.getElementById('project-list');
-        files.forEach(file => {
+        projects.forEach(project => {
             const button = document.createElement('button');
             button.addEventListener('keypress', (event) => {
-                window.location.href = `/project/${file[0]}`;
+                window.location.href = `/project/${project[0]}`;
             });
-            button.textContent = file[1];
+            button.textContent = project[1];
             cardList.appendChild(button);
         });
     });
