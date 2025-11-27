@@ -51,6 +51,11 @@ a:hover {
     color: var(--accent);
 }
 
+ul {
+    list-style-type: disc;
+    padding-left: 3rem;
+}
+
 .container {
     padding: 2rem;
     max-width: 1000px;
