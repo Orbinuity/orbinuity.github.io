@@ -74,6 +74,9 @@ footer {
     padding: 1rem;
     text-align: center;
     color: var(--dark-text);
+    bottom: 0;
+    position: absolute;
+    width: 100%;
 }
 
 button {
