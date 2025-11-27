@@ -4,7 +4,9 @@ fetch('/project/files.json')
         const cardList = document.getElementById('project-list');
         files.forEach(file => {
             const button = document.createElement('button');
-            button.attributes.button = `window.location.href = '/project/${file[0]}';`;
+            button.addEventListener('keypress', (event) => {
+                window.location.href = `/project/${file[0]}`;
+            });
             button.textContent = file[1];
             cardList.appendChild(button);
         });
