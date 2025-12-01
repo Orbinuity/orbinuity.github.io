@@ -125,6 +125,75 @@ button:hover, button:focus {
     overflow: auto;
 }
 
+/* DROPDOWN */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* BUTTON */
+.dropbtn {
+    cursor: pointer;
+    color: var(--dark-text);
+    transition: color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.dropbtn:hover {
+    color: var(--accent);
+}
+
+/* ARROW (right-pointing by default) */
+.arrow {
+    border: solid var(--dark-text);
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(135deg);
+    transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+/* ARROW hover color */
+.dropdown:hover .arrow {
+    border-color: var(--accent);
+}
+
+/* WHEN OPEN → DOWN ARROW */
+.dropdown:hover .arrow {
+    transform: rotate(45deg);
+}
+
+/* MENU BOX */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--bg-accent);
+    border-radius: 6px;
+    min-width: 180px;
+    padding: 0.5rem 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    z-index: 1000;
+}
+
+/* LINKS INSIDE DROPDOWN */
+.dropdown-content a {
+    display: block;
+    padding: 0.6rem 1rem;
+    color: var(--dark-text);
+}
+
+.dropdown-content a:hover {
+    background-color: var(--header);
+    color: var(--accent);
+}
+
+/* SHOW MENU */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
 @media (max-width: 600px) {
     nav {
         display: flex;
