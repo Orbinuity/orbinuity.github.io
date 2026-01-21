@@ -3,11 +3,13 @@ fetch('/nogo/projects.json')
     .then(projects => {
         const cardList = document.getElementById('project-list');
         projects.forEach(project => {
+            const a = document.createElement('a');
+            a.href = `/project/${project[0]}`
+
             const button = document.createElement('button');
-            button.addEventListener("click", () => {
-                window.location.href = `/project/${project[0]}`;
-            });
             button.textContent = project[1];
-            cardList.appendChild(button);
+
+            a.appendChild(button)
+            cardList.appendChild(a);
         });
     });
