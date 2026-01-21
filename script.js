@@ -22,6 +22,7 @@ fetch('/nogo/projects.json')
         projects.forEach(project => {
             const a = document.createElement('a');
             a.href = `/project/${project[0]}`
+            a.textContent = project[1];
 
             dropdown.appendChild(a);
         });
