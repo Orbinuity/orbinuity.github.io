@@ -6,13 +6,6 @@ fetch('/nogo/header.html')
     .then(response => response.text())
     .then(html => {
         document.getElementById('header').innerHTML = html;
-
-        const links = document.querySelectorAll('nav a, #dropdown-content a');
-        links.forEach(link => {
-            if(link.getAttribute('href') === userName) {
-                link.style.textDecoration = 'underline';
-            }
-        });
     });
 
 fetch('/nogo/projects.json')
@@ -25,6 +18,13 @@ fetch('/nogo/projects.json')
             a.textContent = project[1];
 
             dropdown.appendChild(a);
+        });
+
+        const links = document.querySelectorAll('nav a, #dropdown-content a');
+        links.forEach(link => {
+            if(link.getAttribute('href') === userName) {
+                link.style.textDecoration = 'underline';
+            }
         });
     });
 
