@@ -7,7 +7,7 @@ fetch('/nogo/header.html')
     .then(html => {
         document.getElementById('header').innerHTML = html;
 
-        const links = document.querySelectorAll('nav a');
+        const links = document.querySelectorAll('nav a, #dropdown-content a');
         links.forEach(link => {
             if(link.getAttribute('href') === userName) {
                 link.style.textDecoration = 'underline';
