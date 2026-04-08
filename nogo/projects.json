@@ -1,9 +1,9 @@
-[
-    ["DispenserSpear", "Dispenser Spear"],
-    ["GlassMinecraft", "Glass Minecraft"],
-    ["Monx2", "Monx 2"],
-    ["Museay", "Museay"],
-    ["NuclearPowerPlantSimulator", "Nuclear Power Plant Simulator"],
-    ["objRenderer", "obj Renderer"],
-    ["OWE", "OWE"]
-]
+{
+    "all": ["ChestCrumbs", "DispenserSpear", "GlassMinecraft", "Museay", "NuclearPowerPlantSimulator", "objRenderer"],
+    "ChestCrumbs": ["Chest Crumbs", "A minecraft mod to find items in your chest room!", []],
+    "DispenserSpear": ["Dispenser Spear", "Make dispensers use spears like a weapon!", [["https://www.curseforge.com/minecraft/mc-mods/dispenser-spear", "Download on Forge"], ["https://modrinth.com/mod/dispenser-spear", "Download on Modrinth"]]],
+    "GlassMinecraft": ["Glass Minecraft", "A minecraft mod loader", []],
+    "Museay": ["Museay", "A music player", []],
+    "NuclearPowerPlantSimulator": ["Nuclear Power Plant Simulator", "An nuclear power plant simulator", []],
+    "objRenderer": ["obj Renderer", "Spin or move 3d obj files the terminal", []]
+}
