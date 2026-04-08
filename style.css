@@ -1,12 +1,21 @@
+/* Import a clean, modern font to keep it professional */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 :root {
+    /* YOUR EXACT COMPANY COLORS RESTORED */
     --bg: #121212;
     --bg-accent: #2b2b2b;
-    --header: #1a1a1a;
+    --header-solid: #1a1a1a;
+    --header-glass: rgba(26, 26, 26, 0.85); /* #1a1a1a translated to RGBA for glass effect */
     --text: #f0f0f0;
     --dark-text: #888;
     --accent: #136086;
     --accent-focus: #004466;
     --card: #1f1f1f;
+    
+    /* Subtle structural additions */
+    --border: rgba(255, 255, 255, 0.05);
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
 }
 
 * {
@@ -15,15 +24,30 @@
     padding: 0;
 }
 
+/* THE FIX: Lock the width and hide the horizontal overflow */
+html, body {
+    max-width: 100%;
+    overflow-x: hidden; /* This completely disables left/right scrolling */
+}
+
 body {
-    font-family: "Segoe UI", sans-serif;
+    font-family: 'Inter', "Segoe UI", sans-serif;
     background-color: var(--bg);
     color: var(--text);
     line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    
+    display: flex;
+    flex-direction: column;
+    /* Use 100% instead of 100vh if the Y scrollbar is still bugging you on short pages */
+    min-height: 100vh; 
 }
 
+/* ================== HEADER & NAV ================== */
 header {
-    background-color: var(--header);
+    background-color: var(--header-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
@@ -31,60 +55,98 @@ header {
     position: sticky;
     top: 0;
     z-index: 100;
+    border-bottom: 1px solid var(--border);
 }
 
 header h1 {
     font-size: 1.5rem;
+    font-weight: 700;
     color: var(--accent);
+}
+
+/* ================== NAVIGATION & LINKS ================== */
+nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem; /* THIS IS THE MAGIC! Perfect, even spacing between items. No margins needed. */
 }
 
 nav a {
-    margin: 0 1rem;
+    /* Notice: margin is completely removed here! */
+    color: var(--dark-text);
+    font-weight: 500;
+    position: relative;
+    padding: 0.5rem 0;
+    display: inline-block;
 }
+
+/* Animated underline on hover */
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--accent);
+    transition: width 0.3s ease;
+}
+
+nav a:hover { color: var(--text); }
+nav a:hover::after { width: 100%; }
+
+nav a.active, nav a[aria-current="page"] { color: var(--text); }
+nav a.active::after, nav a[aria-current="page"]::after { width: 100%; }
 
 a {
     text-decoration: none;
-    color: var(--dark-text);
-    transition: color 0.3s;
+    transition: color 0.3s ease;
 }
 
-a:hover {
-    color: var(--accent);
-}
-
-ul {
-    list-style-type: disc;
-    padding-left: 3rem;
-}
-
+/* ================== LAYOUT ================== */
 .container {
-    padding: 2rem;
+    padding: 3rem 2rem;
     max-width: 1000px;
-    margin: auto;
+    margin: 0 auto;
+    width: 100%;
+    /* This pushes the footer down naturally */
+    flex: 1; 
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 section {
     margin-bottom: 4rem;
 }
 
+ul {
+    list-style-type: disc;
+    padding-left: 2rem;
+    color: var(--dark-text);
+}
+
+/* ================== CARDS ================== */
 .card {
     background-color: var(--card);
-    padding: 1.5rem;
+    padding: 2rem;
     border-radius: 8px;
-    margin: 1rem 0;
+    margin: 1.5rem 0;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-footer {
-    background-color: var(--header);
-    padding: 1rem;
-    text-align: center;
-    color: var(--dark-text);
-    width: 100%;
-    position: fixed;
-    bottom: 0;
-    left: 0;
+.card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
 }
 
+/* ================== BUTTONS ================== */
 button {
     background-color: var(--accent);
     color: var(--text);
@@ -93,41 +155,54 @@ button {
     padding: 0.75rem 1.5rem;
     margin: 0.5rem 0;
     font-size: 1rem;
+    font-weight: 600;
     font-family: inherit;
     cursor: pointer;
-    transition: background 0.2s, color 0.2s, transform 0.1s;
-    box-shadow: 0 2px 8px rgba(66, 154, 227, 0.08);
+    transition: all 0.2s ease;
     display: block;
     width: 100%;
     max-width: 400px;
-    text-align: left;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(19, 96, 134, 0.2);
 }
 
 button:hover, button:focus {
     background-color: var(--accent-focus);
-    transform: translateY(-2px) scale(1.03);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(19, 96, 134, 0.4);
     outline: none;
 }
 
+/* ================== FORMS ================== */
 #contact form {
     display: flex;
     flex-direction: column;
+    gap: 1rem;
+    max-width: 600px;
 }
 
 #contact input, #contact textarea {
-    padding: 0.75rem;
-    margin: 0.5rem 0;
-    border: none;
-    border-radius: 5px;
+    padding: 1rem;
+    border: 1px solid var(--bg-accent);
+    border-radius: 6px;
     background: var(--bg-accent);
     color: var(--text);
-    resize: none;
-    overflow: auto;
+    font-family: inherit;
+    resize: vertical;
+    transition: all 0.3s ease;
+}
+
+#contact input:focus, #contact textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(19, 96, 134, 0.3);
 }
 
 .dropdown {
     position: relative;
-    display: inline-block;
+    display: flex; 
+    align-items: center;
+    margin: 0; 
 }
 
 .dropbtn {
@@ -136,63 +211,188 @@ button:hover, button:focus {
     transition: color 0.3s;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
+    font-weight: 500;
+    padding: 0.5rem 0; 
+    margin: 0; 
+    
+    background: transparent;
+    border: none;
+    font-size: 1rem;
+    font-family: inherit;
 }
 
 .dropbtn:hover {
-    color: var(--accent);
+    color: var(--text);
 }
 
+/* THE ARROW */
 .arrow {
-    border: solid var(--dark-text);
+    border: solid currentcolor;
     border-width: 0 3px 3px 0;
     display: inline-block;
     padding: 3px;
-    transform: rotate(-45deg);
+    transform: rotate(-45deg); 
     transition: transform 0.25s ease, border-color 0.25s ease;
+    margin-left: 8px; /* Safe barrier from text */
+    vertical-align: middle;
+    margin-bottom: 2px;
 }
 
 .dropdown:hover .arrow {
-    border-color: var(--accent);
-}
-
-.dropdown:hover .arrow {
-    transform: rotate(45deg);
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: var(--bg-accent);
-    border-radius: 6px;
-    min-width: 180px;
-    padding: 0.5rem 0;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    z-index: 1000;
-}
-
-.dropdown-content a {
-    display: block;
-    padding: 0.6rem 1rem;
-    color: var(--dark-text);
-}
-
-.dropdown-content a:hover {
+    transform: rotate(45deg); 
     color: var(--accent);
 }
 
-.dropdown:hover .dropdown-content {
-    display: block;
+/* THE MENU BOX */
+.dropdown-content {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    top: 100%; 
+    
+    /* FIX: Anchor to the RIGHT so it expands safely INTO the page, not off it! */
+    right: 0;
+    left: auto; 
+    
+    transform: translateY(10px); 
+    background-color: var(--bg-accent);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    min-width: 220px;
+    padding: 0.5rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@media (max-width: 600px) {
-    nav {
-        display: flex;
+.dropdown:hover .dropdown-content {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0); 
+}
+
+/* THE INVISIBLE BRIDGE (Stops menu from closing when moving mouse down) */
+.dropdown::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 15px; 
+    background: transparent;
+}
+
+/* RESTORED: THE MENU ITEMS */
+.container form, 
+.card form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem; 
+    max-width: 600px;
+    margin: 0 auto; 
+    /* Removed the background, padding, border, and shadow so it doesn't double-up! */
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+}
+
+.container form label, 
+.card form label {
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: -0.75rem; 
+    font-size: 0.95rem;
+}
+
+/* Broadly target all inputs and textareas */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+textarea {
+    padding: 0.85rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    border-radius: 6px;
+    background-color: var(--bg-accent);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 1rem;
+    width: 100%;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    /* Reset default styling */
+    outline: none;
+    box-sizing: border-box;
+}
+
+textarea {
+    min-height: 150px;
+    resize: vertical; 
+}
+
+/* Professional Focus State - The "Glow" Effect */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+textarea:focus {
+    border-color: var(--accent);
+    background-color: #333; 
+    box-shadow: 0 0 0 3px rgba(19, 96, 134, 0.3); 
+}
+
+/* Placeholder text styling */
+input::placeholder, 
+textarea::placeholder {
+    color: var(--dark-text);
+    opacity: 0.6;
+}
+
+/* Make sure the submit button fits the form perfectly */
+.container form button, 
+.card form button {
+    margin-top: 0.5rem;
+    width: 100%;
+    max-width: none; 
+    text-align: center;
+}
+
+/* ================== FOOTER ================== */
+footer {
+    background-color: var(--header-solid);
+    border-top: 1px solid var(--border);
+    padding: 1.5rem;
+    text-align: center;
+    color: var(--dark-text);
+    width: 100%;
+    margin-top: auto; /* Pushes the footer exactly to the bottom */
+}
+
+/* ================== MOBILE RESPONSIVENESS ================== */
+@media (max-width: 768px) {
+    header {
         flex-direction: column;
-        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
     }
 
     nav a {
-        margin: 0.5rem 0;
+        margin: 0.5rem;
+    }
+
+    .dropdown-content {
+        left: 0;
+        transform: translateX(0) translateY(10px);
+    }
+
+    .dropdown:hover .dropdown-content {
+        transform: translateX(0) translateY(0);
     }
 }
