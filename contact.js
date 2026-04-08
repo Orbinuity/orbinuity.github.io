@@ -22,5 +22,5 @@ function sendEmail(event) {
     const body = encodeURIComponent(prt.replace("&(body)", message).replace("&(name)", name));
     const mailto = `mailto:${mail}?subject=${subject}&body=${body}`;
     
-    window.location.href = mailto;
+    window.open(mailto, "_blank");
 }
