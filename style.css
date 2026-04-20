@@ -160,14 +160,14 @@ button:hover, button:focus {
     outline: none;
 }
 
- form {
+form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
     max-width: 600px;
 }
 
- input,  textarea {
+input,  textarea {
     padding: 1rem;
     border: 1px solid var(--bg-accent);
     border-radius: 6px;
@@ -178,7 +178,7 @@ button:hover, button:focus {
     transition: all 0.3s ease;
 }
 
- input:focus,  textarea:focus {
+input:focus,  textarea:focus {
     outline: none;
     border-color: var(--accent);
     box-shadow: 0 0 0 2px rgba(19, 96, 134, 0.3);
