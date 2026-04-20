@@ -1,19 +1,16 @@
-/* Import a clean, modern font to keep it professional */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
-    /* YOUR EXACT COMPANY COLORS RESTORED */
     --bg: #121212;
     --bg-accent: #2b2b2b;
     --header-solid: #1a1a1a;
-    --header-glass: rgba(26, 26, 26, 0.85); /* #1a1a1a translated to RGBA for glass effect */
+    --header-glass: rgba(26, 26, 26, 0.85);
     --text: #f0f0f0;
     --dark-text: #888;
     --accent: #136086;
     --accent-focus: #004466;
     --card: #1f1f1f;
     
-    /* Subtle structural additions */
     --border: rgba(255, 255, 255, 0.05);
     --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
 }
@@ -24,10 +21,9 @@
     padding: 0;
 }
 
-/* THE FIX: Lock the width and hide the horizontal overflow */
 html, body {
     max-width: 100%;
-    overflow-x: hidden; /* This completely disables left/right scrolling */
+    overflow-x: hidden;
 }
 
 body {
@@ -39,11 +35,9 @@ body {
     
     display: flex;
     flex-direction: column;
-    /* Use 100% instead of 100vh if the Y scrollbar is still bugging you on short pages */
     min-height: 100vh; 
 }
 
-/* ================== HEADER & NAV ================== */
 header {
     background-color: var(--header-glass);
     backdrop-filter: blur(12px);
@@ -64,15 +58,13 @@ header h1 {
     color: var(--accent);
 }
 
-/* ================== NAVIGATION & LINKS ================== */
 nav {
     display: flex;
     align-items: center;
-    gap: 2rem; /* THIS IS THE MAGIC! Perfect, even spacing between items. No margins needed. */
+    gap: 2rem;
 }
 
 nav a {
-    /* Notice: margin is completely removed here! */
     color: var(--dark-text);
     font-weight: 500;
     position: relative;
@@ -80,7 +72,6 @@ nav a {
     display: inline-block;
 }
 
-/* Animated underline on hover */
 nav a::after {
     content: '';
     position: absolute;
@@ -103,13 +94,11 @@ a {
     transition: color 0.3s ease;
 }
 
-/* ================== LAYOUT ================== */
 .container {
     padding: 3rem 2rem;
     max-width: 1000px;
     margin: 0 auto;
     width: 100%;
-    /* This pushes the footer down naturally */
     flex: 1; 
     animation: fadeIn 0.5s ease-out;
 }
@@ -129,7 +118,6 @@ ul {
     color: var(--dark-text);
 }
 
-/* ================== CARDS ================== */
 .card {
     background-color: var(--card);
     padding: 2rem;
@@ -146,7 +134,6 @@ ul {
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
 }
 
-/* ================== BUTTONS ================== */
 button {
     background-color: var(--accent);
     color: var(--text);
@@ -173,15 +160,14 @@ button:hover, button:focus {
     outline: none;
 }
 
-/* ================== FORMS ================== */
-#contact form {
+ form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
     max-width: 600px;
 }
 
-#contact input, #contact textarea {
+ input,  textarea {
     padding: 1rem;
     border: 1px solid var(--bg-accent);
     border-radius: 6px;
@@ -192,7 +178,7 @@ button:hover, button:focus {
     transition: all 0.3s ease;
 }
 
-#contact input:focus, #contact textarea:focus {
+ input:focus,  textarea:focus {
     outline: none;
     border-color: var(--accent);
     box-shadow: 0 0 0 2px rgba(19, 96, 134, 0.3);
@@ -226,7 +212,6 @@ button:hover, button:focus {
     color: var(--text);
 }
 
-/* THE ARROW */
 .arrow {
     border: solid currentcolor;
     border-width: 0 3px 3px 0;
@@ -234,7 +219,7 @@ button:hover, button:focus {
     padding: 3px;
     transform: rotate(-45deg); 
     transition: transform 0.25s ease, border-color 0.25s ease;
-    margin-left: 8px; /* Safe barrier from text */
+    margin-left: 8px;
     vertical-align: middle;
     margin-bottom: 2px;
 }
@@ -244,14 +229,12 @@ button:hover, button:focus {
     color: var(--accent);
 }
 
-/* THE MENU BOX */
 .dropdown-content {
     visibility: hidden;
     opacity: 0;
     position: absolute;
     top: 100%; 
     
-    /* FIX: Anchor to the RIGHT so it expands safely INTO the page, not off it! */
     right: 0;
     left: auto; 
     
@@ -272,7 +255,6 @@ button:hover, button:focus {
     transform: translateY(0); 
 }
 
-/* THE INVISIBLE BRIDGE (Stops menu from closing when moving mouse down) */
 .dropdown::after {
     content: '';
     position: absolute;
@@ -283,7 +265,6 @@ button:hover, button:focus {
     background: transparent;
 }
 
-/* RESTORED: THE MENU ITEMS */
 .container form, 
 .card form {
     display: flex;
@@ -291,7 +272,6 @@ button:hover, button:focus {
     gap: 1.25rem; 
     max-width: 600px;
     margin: 0 auto; 
-    /* Removed the background, padding, border, and shadow so it doesn't double-up! */
     background: transparent;
     border: none;
     box-shadow: none;
@@ -306,7 +286,6 @@ button:hover, button:focus {
     font-size: 0.95rem;
 }
 
-/* Broadly target all inputs and textareas */
 input[type="text"],
 input[type="email"],
 input[type="password"],
@@ -321,7 +300,6 @@ textarea {
     font-size: 1rem;
     width: 100%;
     transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-    /* Reset default styling */
     outline: none;
     box-sizing: border-box;
 }
@@ -331,7 +309,6 @@ textarea {
     resize: vertical; 
 }
 
-/* Professional Focus State - The "Glow" Effect */
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="password"]:focus,
@@ -342,14 +319,12 @@ textarea:focus {
     box-shadow: 0 0 0 3px rgba(19, 96, 134, 0.3); 
 }
 
-/* Placeholder text styling */
 input::placeholder, 
 textarea::placeholder {
     color: var(--dark-text);
     opacity: 0.6;
 }
 
-/* Make sure the submit button fits the form perfectly */
 .container form button, 
 .card form button {
     margin-top: 0.5rem;
@@ -358,7 +333,6 @@ textarea::placeholder {
     text-align: center;
 }
 
-/* ================== FOOTER ================== */
 footer {
     background-color: var(--header-solid);
     border-top: 1px solid var(--border);
@@ -366,10 +340,9 @@ footer {
     text-align: center;
     color: var(--dark-text);
     width: 100%;
-    margin-top: auto; /* Pushes the footer exactly to the bottom */
+    margin-top: auto;
 }
 
-/* ================== MOBILE RESPONSIVENESS ================== */
 @media (max-width: 768px) {
     header {
         flex-direction: column;
