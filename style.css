@@ -91,6 +91,16 @@ a:hover::after { width: 100%; }
 nav a.active, nav a[aria-current="page"] { color: var(--text); }
 nav a.active::after, nav a[aria-current="page"]::after { width: 100%; }
 
+.card a {
+    display: block;
+    width: 100%;
+}
+
+.card a button {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .container {
     padding: 3rem 2rem;
     max-width: 1000px;
