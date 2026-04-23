@@ -64,15 +64,17 @@ nav {
     gap: 2rem;
 }
 
-nav a {
+a {
     color: var(--dark-text);
     font-weight: 500;
     position: relative;
     padding: 0.5rem 0;
     display: inline-block;
+    text-decoration: none;
+    transition: color 0.3s ease;
 }
 
-nav a::after {
+a::after {
     content: '';
     position: absolute;
     width: 0;
@@ -83,16 +85,11 @@ nav a::after {
     transition: width 0.3s ease;
 }
 
-nav a:hover { color: var(--text); }
-nav a:hover::after { width: 100%; }
+a:hover { color: var(--text); }
+a:hover::after { width: 100%; }
 
 nav a.active, nav a[aria-current="page"] { color: var(--text); }
 nav a.active::after, nav a[aria-current="page"]::after { width: 100%; }
-
-a {
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
 
 .container {
     padding: 3rem 2rem;
@@ -234,16 +231,18 @@ input:focus,  textarea:focus {
     opacity: 0;
     position: absolute;
     top: 100%; 
-    
     right: 0;
     left: auto; 
-    
     transform: translateY(10px); 
     background-color: var(--bg-accent);
     border: 1px solid var(--border);
     border-radius: 8px;
     min-width: 220px;
-    padding: 0.5rem;
+    padding: 0.5rem 1.5rem; 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
     z-index: 1000;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -263,6 +262,15 @@ input:focus,  textarea:focus {
     width: 100%;
     height: 15px; 
     background: transparent;
+}
+
+.dropdown-content a {
+    display: inline-block;
+    padding: 0.5rem 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
 }
 
 .container form, 
