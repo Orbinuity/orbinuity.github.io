@@ -85,6 +85,10 @@ a::after {
     transition: width 0.3s ease;
 }
 
+.no-underline::after {
+    height: 0;
+}
+
 a:hover { color: var(--text); }
 a:hover::after { width: 100%; }
 
