@@ -27,6 +27,7 @@ function renderContent() {
             buttons.innerHTML = '';
             pageButtons.forEach(button => {
                 const a = document.createElement('a');
+                a.className = "no-underline"
                 a.href = button[0]
 
                 const pageButton = document.createElement('button');
@@ -34,6 +35,7 @@ function renderContent() {
 
                 a.appendChild(pageButton)
                 buttons.appendChild(a);
+                buttons.appendChild(document.createTextNode(' '));
             });
         });
     }
