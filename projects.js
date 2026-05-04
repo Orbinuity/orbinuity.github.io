@@ -4,6 +4,7 @@ fetch('/nogo/projects.json')
         const cardList = document.getElementById('project-list');
         projects['all'].forEach(project => {
             const a = document.createElement('a');
+            a.className = "no-underline"
             a.href = `/project#${project}`
 
             const button = document.createElement('button');
@@ -11,5 +12,7 @@ fetch('/nogo/projects.json')
 
             a.appendChild(button)
             cardList.appendChild(a);
+
+            cardList.appendChild(document.createTextNode(' '));
         });
     });
