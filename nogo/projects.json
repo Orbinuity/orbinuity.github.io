@@ -7,5 +7,5 @@
     "Museay": ["Museay", "A music player", []],
     "NuclearPowerPlantSimulator": ["Nuclear Power Plant Simulator", "An nuclear power plant simulator", []],
     "objRenderer": ["obj Renderer", "Spin or move 3d obj files the terminal", []],
-    "Orbo": ["Orbo", "A way to be together!", [["orbo.orbinuity.nl", "Website"]]]
+    "Orbo": ["Orbo", "A way to be together!", [["https://orbo.orbinuity.nl", "Website"]]]
 }
