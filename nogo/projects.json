@@ -1,5 +1,4 @@
 {
-    "all": ["ChestCrumbs", "DispenserSpear", "GlassMinecraft", "Museay", "NuclearPowerPlantSimulator", "objRenderer", "BillboardShow", "Orbo"],
     "BillboardShow": ["Billboard Show", "Make very simple Billboards or Info boards!", []],
     "ChestCrumbs": ["Chest Crumbs", "A minecraft mod to find items in your chest room!", []],
     "DispenserSpear": ["Dispenser Spear", "Make dispensers use spears like a weapon!", [["https://www.curseforge.com/minecraft/mc-mods/dispenser-spear", "Download on Forge"], ["https://modrinth.com/mod/dispenser-spear", "Download on Modrinth"]]],
