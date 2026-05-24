@@ -2,7 +2,7 @@ fetch('/nogo/projects.json')
     .then(res => res.json())
     .then(projects => {
         const cardList = document.getElementById('project-list');
-        projects.keys().forEach(project => {
+        Object.keys(projects).forEach(project => {
             const a = document.createElement('a');
             a.className = "no-underline"
             a.href = `/project#${project}`
