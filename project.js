@@ -20,7 +20,7 @@ function renderContent() {
             name.textContent = project[0]
             description.textContent = project[1]
 
-            let pageButtons = [[`https://github.com/Orbinuity/${route}`, "Repo"], [`https://github.com/Orbinuity/${route}/releases`, "Download"]]
+            let pageButtons = [[`https://github.com/Orbinuity/${route}`, "Repo"], [`https://github.com/Orbinuity/${route}/releases`, "Download"], [`https://help.orbinuity.nl/docs/${route}`, "Docs"]]
             
             pageButtons = pageButtons.concat(project[2])
             
