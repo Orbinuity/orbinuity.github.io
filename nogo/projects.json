@@ -2,9 +2,10 @@
     "BillboardShow": ["Billboard Show", "Make very simple Billboards or Info boards!", []],
     "DispenserSpear": ["Dispenser Spear", "Make dispensers use spears like a weapon!", [["https://www.curseforge.com/minecraft/mc-mods/dispenser-spear", "Download on Forge"], ["https://modrinth.com/mod/dispenser-spear", "Download on Modrinth"]]],
     "GlassMinecraft": ["Glass Minecraft", "A minecraft mod loader", []],
+    "HomeAssistantRoonUI": ["Home Assistant Roon UI", "Have a full Roon UI in Home Assistant.", []],
     "Museay": ["Museay", "A music player", []],
     "NuclearPowerPlantSimulator": ["Nuclear Power Plant Simulator", "An nuclear power plant simulator", []],
     "objRenderer": ["obj Renderer", "Spin or move 3d obj files the terminal", []],
     "orbo": ["Orbo", "A way to be together!", [["https://orbo.orbinuity.nl", "Website"]]],
-    "OverloadSMP": ["Overload SMP", "This mod adds some stuff and tools for the Overload SMP.", []]
+    "RoonWebUI": ["Roon Web UI", "Roon Extension to create a web ui.", []]
 }
