@@ -1,4 +1,4 @@
-fetch('http://127.0.0.1:3000/nogo/news.html')
+fetch('https://orbinuity.nl/nogo/news.html')
     .then(response => response.text())
     .then(html => {
         if (document.currentScript?.dataset?.nonews !== "true") {
