@@ -7,5 +7,6 @@
     "NuclearPowerPlantSimulator": ["Nuclear Power Plant Simulator", "An nuclear power plant simulator", []],
     "objRenderer": ["obj Renderer", "Spin or move 3d obj files the terminal", []],
     "orbo": ["Orbo", "A way to be together!", [["https://orbo.orbinuity.nl", "Website"]]],
+    "pyneltuya": ["PyNelTuya", "Control Tuya matrix lights with python", [["https://pypi.org/u/PyNelTuya", "PyPi"]]],
     "RoonWebUI": ["Roon Web UI", "Roon Extension to create a web ui.", []]
 }
