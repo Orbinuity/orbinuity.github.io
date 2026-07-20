@@ -3,14 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:title" content="Orbinuity - Contact">
-    <meta property="og:description" content="Contact page of Orbinuity">
-    <meta property="og:image" content="https://data.orbinuity.nl/assets/banner.png">
-    <meta name="description" content="Contact page of Orbinuity">
-    <meta name="generator" content="Github">
-    <meta name="author" content="Orbinuity">
-    <meta name="keywords" content="orbinuity, tech, software, hardware, company, contact">
-    <meta name="robots" content="index, follow">
+
+    <meta name="description" content="You can find us at Patreon, Twitch, Reddit, YouTube and GitHub.">
+    <link rel="canonical" href="https://orbinuity.nl/contact">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ContactPage",
+        "name": "Contact",
+        "description": "You can find us at Patreon, Twitch, Reddit, YouTube and GitHub.",
+        "url": "https://orbinuity.nl/contact",
+        "mainEntity": {
+            "@type": "Organization",
+            "name": "Orbinuity",
+            "url": "https://orbinuity.nl/home",
+            "logo": "https://data.orbinuity.nl/assets/logo.png",
+            "contactPoint": {
+                "@type": "ContactPoint",
+                "email": "orbinuity@ratgers.nl",
+                "contactType": "general inquiries"
+            },
+            "sameAs": [
+                "https://www.patreon.com/Orbinuity",
+                "https://www.twitch.tv/Orbinuity",
+                "https://www.reddit.com/r/Orbinuity",
+                "https://www.youtube.com/@Orbinuity",
+                "https://github.com/Orbinuity"
+            ]
+        }
+    }
+    </script>
+
     <link rel="icon" href="https://data.orbinuity.nl/assets/logo.png" type="image/png">
     <title>Orbinuity - Contact</title>
     <link rel="stylesheet" href="/style.css">
@@ -25,10 +50,10 @@
         <div class="card">
             <a href="mailto:orbinuity@ratgers.nl" class="no-underline"><button>E-mail</button></a>
             <a href="https://www.patreon.com/cw/Orbinuity" class="no-underline"><button>Patreon</button></a>
-            <a href="https://www.twitch.tv/orbinuity" class="no-underline"><button>Twitch</button></a>
+            <a href="https://www.twitch.tv/Orbinuity" class="no-underline"><button>Twitch</button></a>
             <a href="https://www.reddit.com/r/Orbinuity/" class="no-underline"><button>Reddit</button></a>
             <a href="https://www.youtube.com/@Orbinuity" class="no-underline"><button>YouTube</button></a>
-            <a href="https://www.github.com/Orbinuity" class="no-underline"><button>Github</button></a>
+            <a href="https://www.github.com/Orbinuity" class="no-underline"><button>GitHub</button></a>
         </div>
         <div class="card">
             <form onsubmit="sendEmail(event)">
