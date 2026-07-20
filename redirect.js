@@ -1,6 +1,26 @@
 const mondal = document.getElementById("mondal");
 const mondalStay = document.getElementById("mondal");
 
+function setCookie(name, value, days = 7) {
+    const date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    const expires = "expires=" + date.toUTCString();
+    const encodedValue = encodeURIComponent(value);
+    document.cookie = `${name}=${encodedValue}; ${expires}; path=/; SameSite=Lax; Secure`;
+}
+
+function getCookie(name) {
+    const nameEQ = name + "=";
+    const cookieArray = document.cookie.split(';');
+    for (let i = 0; i < cookieArray.length; i++) {
+        let cookie = cookieArray[i].trim();
+        if (cookie.indexOf(nameEQ) === 0) {
+            return decodeURIComponent(cookie.substring(nameEQ.length));
+        }
+    }
+    return null;
+}
+
 async function getUserCountry() {
     try {
         const response = await fetch('https://ipapi.co/json');
@@ -13,11 +33,14 @@ async function getUserCountry() {
     }
 }
 
-mondalStay.onclick = () => mondal.close();
+mondalStay.onclick = () => {
+    mondal.close();
+    setCookie("stay", "yes", 14)
+};
 
 getUserCountry().then(country => {
     console.log(country);
-    if (country === "NL") {
+    if (country === "NL" && getCookie("stay") !== "yes") {
         mondal.showModal();
     }
 })
