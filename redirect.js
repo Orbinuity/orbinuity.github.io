@@ -35,12 +35,14 @@ async function getUserCountry() {
 
 mondalStay.onclick = () => {
     mondal.close();
-    setCookie("stay", "yes", 14)
+    setCookie("stay", "yes", 14);
 };
 
-getUserCountry().then(country => {
-    console.log(country);
-    if (country === "NL" && getCookie("stay") !== "yes") {
-        mondal.showModal();
-    }
-})
+if (getCookie("stay") !== "yes") {
+    getUserCountry().then(country => {
+        console.log(country);
+        if (country === "NL") {
+            mondal.showModal();
+        }
+    });
+}
