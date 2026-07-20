@@ -5,7 +5,7 @@ fetch('/nogo/projects.json')
         Object.keys(projects).forEach(project => {
             const a = document.createElement('a');
             a.className = "no-underline"
-            a.href = `/project#${project}`
+            a.href = `/project?id=${project}`
 
             const button = document.createElement('button');
             button.textContent = projects[project][0];
