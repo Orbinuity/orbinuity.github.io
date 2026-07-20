@@ -3,14 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:title" content="Orbinuity - Home">
-    <meta property="og:description" content="The small company that loves tech">
-    <meta property="og:image" content="https://data.orbinuity.nl/assets/banner.png">
-    <meta name="description" content="The small company that loves tech">
-    <meta name="generator" content="Github">
-    <meta name="author" content="Orbinuity">
-    <meta name="keywords" content="orbinuity, tech, software, hardware, company, home">
-    <meta name="robots" content="index, follow">
+
+    <meta name="description" content="The small company that loves tech.">
+    <link rel="canonical" href="https://orbinuity.nl/home">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "WebSite",
+                "@id": "https://orbinuity.nl/home#website",
+                "url": "https://orbinuity.nl/home",
+                "name": "Orbinuity",
+                "publisher": {
+                    "@id": "https://orbinuity.nl/home#organization"
+                }
+            },
+            {
+                "@type": "Organization",
+                "@id": "https://orbinuity.nl/home#organization",
+                "name": "Orbinuity",
+                "url": "https://orbinuity.nl/home",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://data.orbinuity.nl/assets/logo.png"
+                },
+                "sameAs": [
+                    "https://www.patreon.com/Orbinuity",
+                    "https://www.twitch.tv/Orbinuity",
+                    "https://www.reddit.com/r/Orbinuity",
+                    "https://www.youtube.com/@Orbinuity",
+                    "https://github.com/Orbinuity"
+                ]
+            }
+        ]
+    }
+    </script>
+
     <link rel="icon" href="https://data.orbinuity.nl/assets/logo.png" type="image/png">
     <title>Orbinuity - Home</title>
     <link rel="stylesheet" href="/style.css">
@@ -20,7 +51,7 @@
 <div id="header"></div>
 
 <dialog id="mondal">
-    <p>We hebben en website voor om zaken te doen wil je geen zaken doen dan kun je hier blijfen.</p>
+    <p>We hebben en website voor om zaken te doen, wil je geen zaken doen dan kun je hier blijfen.</p>
     <a class="no-underline" style="float:left;"><button id="mondal-stay">Hier blijfen / Stay</button></a>
     <a href="https://client.orbinuity.nl" class="no-underline" style="float:right;"><button>Ik wil zaken doen</button></a>
 </dialog>
@@ -29,7 +60,7 @@
     <h1>Welcome to Orbinuity</h1>
     <section>
         <div class="card">
-            <p>The small company that loves tech</p>
+            <p>The small company that loves tech.</p>
         </div>
     </section>
 </main>
