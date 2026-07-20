@@ -4,7 +4,7 @@ fetch('/nogo/projects.json')
         const dropdown = document.getElementById('dropdown-content');
         Object.keys(projects).forEach(project => {
             const a = document.createElement('a');
-            a.href = `/project#${project}`
+            a.href = `/project?id=${project}`
             a.textContent = projects[project][0];
 
             dropdown.appendChild(a);
