@@ -1,4 +1,5 @@
 {
+    "AiMan": ["AiMan", "Run and handel AMA models", []],
     "BillboardShow": ["Billboard Show", "Make very simple Billboards or Info boards!", []],
     "DispenserSpear": ["Dispenser Spear", "Make dispensers use spears like a weapon!", [["https://www.curseforge.com/minecraft/mc-mods/dispenser-spear", "Download on Forge"], ["https://modrinth.com/mod/dispenser-spear", "Download on Modrinth"]]],
     "GlassMinecraft": ["Glass Minecraft", "A minecraft mod loader", []],
