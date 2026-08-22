@@ -34,7 +34,7 @@ function renderContent() {
             let pageButtons = [
                 [`https://github.com/Orbinuity/${route}`, "Repo"], 
                 [`https://github.com/Orbinuity/${route}/releases`, "Download"], 
-                [`https://help.orbinuity.nl/docs/${route}`, "Docs"]
+                [`https://help.orbinuity.nl/doc?project=${route}`, "Documentation"]
             ];
             
             pageButtons = pageButtons.concat(project[2] || []);
