@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Orbinuity API Bridge</title>
+</head>
+<body>
+<script>
+    function getTokenCookie() {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; token=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+        return null;
+    }
+
+    window.addEventListener('message', async (event) => {
+        const { requestId, action, appKey, payload } = event.data || {};
+
+        if (!requestId || !action) return;
+
+        const token = getTokenCookie();
+
+        if (!token) {
+            event.source.postMessage({
+                requestId,
+                success: false,
+                error: 'User is not logged in to Orbinuity.'
+            }, event.origin);
+            return;
+        }
+
+        try {
+            if (action === 'getUserInfo') {
+                const res = await fetch(`https://api.orbinuity.nl:34430/api/account/me`, {
+                    method: 'GET',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const data = await res.json();
+                
+                if (!res.ok) throw new Error(data.error || 'Failed to fetch user info');
+
+                event.source.postMessage({
+                    requestId,
+                    success: true,
+                    data: data
+                }, event.origin);
+
+            } else if (action === 'get') {
+                const res = await fetch(`https://api.orbinuity.nl:34430/api/external/${appKey}`, {
+                    method: 'GET',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const data = await res.json();
+                
+                if (!res.ok) throw new Error(data.error || 'Failed to fetch data');
+
+                event.source.postMessage({
+                    requestId,
+                    success: true,
+                    data: data.data
+                }, event.origin);
+
+            } else if (action === 'save') {
+                // Save 3rd party app data
+                const res = await fetch(`https://api.orbinuity.nl:34430/api/external/${appKey}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+
+                if (!res.ok) throw new Error(data.error || 'Failed to save data');
+
+                event.source.postMessage({
+                    requestId,
+                    success: true,
+                    data: data.data
+                }, event.origin);
+            }
+        } catch (err) {
+            event.source.postMessage({
+                requestId,
+                success: false,
+                error: err.message
+            }, event.origin);
+        }
+    });
+</script>
+</body>
+</html>
