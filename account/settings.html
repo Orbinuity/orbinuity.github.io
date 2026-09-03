@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://data.orbinuity.nl/assets/logo.png" type="image/png">
+    <title>Orbinuity - Settings</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<div id="header"></div>
+
+<main class="container">
+    <h1>Account & Settings</h1>
+    <section>
+        <!-- Card 1: User Info -->
+        <div class="card" style="margin-bottom: 20px;">
+            <h2>User Info</h2>
+            <form onsubmit="saveProfile(event)">
+                <div class="form-group">
+                    <label for="displayName">Display Name</label>
+                    <input type="text" id="displayName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <input type="number" id="age" min="1" max="120">
+                </div>
+
+                <div class="form-group">
+                    <label for="pronouns">Pronouns</label>
+                    <input type="text" id="pronouns" placeholder="e.g. he/him, they/them">
+                </div>
+
+                <div class="form-group">
+                    <label for="country">Country</label>
+                    <input type="text" id="country" placeholder="e.g. NL, US">
+                </div>
+
+                <p id="profile-msg" style="margin-top: 15px;"></p>
+
+                <button type="submit">Save User Info</button>
+            </form>
+        </div>
+
+        <!-- Card 2: Settings / Preferences -->
+        <div class="card">
+            <h2>Preferences</h2>
+            <form onsubmit="savePreferences(event)">
+                <div class="form-group">
+                    <label for="theme">Theme</label>
+                    <select id="theme">
+                        <option value="dark">Dark</option>
+                        <option value="light">Light</option>
+                    </select>
+                </div>
+
+                <div class="form-group" style="display: flex; align-items: center; gap: 10px;">
+                    <input type="checkbox" id="notifications">
+                    <label for="notifications" style="margin: 0;">Enable Notifications</label>
+                </div>
+
+                <p id="settings-msg" style="margin-top: 15px;"></p>
+
+                <button type="submit">Save Preferences</button>
+            </form>
+        </div>
+    </section>
+</main>
+
+<div id="footer"></div>
+
+<script src="/script.js"></script>
+<script src="/account/settings.js"></script>
+
+</body>
+</html>
