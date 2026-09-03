@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://data.orbinuity.nl/assets/logo.png" type="image/png">
+    <title>Orbinuity - Login</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<div id="header"></div>
+
+<main class="container">
+    <h1>Login</h1>
+    <section>
+        <div class="card">
+            <form onsubmit="login(event)">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" required autocomplete="username">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required autocomplete="current-password">
+                </div>
+
+                <p id="error-msg" style="color: red; margin-top: 10px;"></p>
+
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </section>
+</main>
+
+<div id="footer"></div>
+
+<script src="/script.js"></script>
+<script src="/account/login.js"></script>
+
+</body>
+</html>
