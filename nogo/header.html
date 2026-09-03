@@ -1,16 +1,24 @@
 <header>
     <a href="/home" class="no-underline"><img src="https://data.orbinuity.nl/assets/banner.png" alt="icon" style="height:42px; vertical-align: middle; margin-right: 8px;"></a>
-    <nav>
+    <nav id="nav-bar">
         <a href="/home">Home</a>
         <a href="/about">About</a>
         <a href="/contact">Contact</a>
         <div class="dropdown">
             <div class="dropbtn"><a href="/projects">Projects</a> <span class="arrow"></span></div>
-            <div class="dropdown-content" id="dropdown-content">
+            <div class="dropdown-content" id="dropdown-projects">
             </div>
         </div>
         <a href="https://client.orbinuity.nl">I want to do business</a>
         <a href="https://help.orbinuity.nl">Help</a>
+        <a href="/api/doc">SDK</a>
+        <div id="account" class="dropdown">
+            <div class="dropbtn"><a href="/account">Me</a> <span class="arrow"></span></div>
+            <div class="dropdown-content" id="dropdown-content">
+                <a href="/account/settings">Settings</a>
+                <a href="#" id="signout">Sign Out</a>
+            </div>
+        </div>
     </nav>
     <script src="/nogo/header.js"></script>
 </header>
