@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://data.orbinuity.nl/assets/logo.png" type="image/png">
+    <title>Orbinuity - SDK Documentation</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        pre {
+            background-color: var(--bg-accent);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        code {
+            font-family: monospace;
+            color: var(--text);
+            font-size: 0.95rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            color: var(--text);
+            background-color: var(--bg-accent);
+        }
+
+        td {
+            color: var(--dark-text);
+        }
+    </style>
+</head>
+<body>
+
+<div id="header"></div>
+
+<main class="container">
+    <h1>SDK Documentation</h1>
+    <section>
+        <div class="card">
+            <h2>Getting Started</h2>
+            <p style="color: var(--dark-text); margin: 0.5rem 0 1rem 0;">
+                The Orbinuity SDK enables 3rd-party web applications to authenticate users and persist application-specific JSON data using their Orbinuity account.
+            </p>
+
+            <p><strong>1. Include the SDK:</strong></p>
+            <pre><code>&lt;script src="https://orbinuity.nl/api/sdk.js"&gt;&lt;/script&gt;</code></pre>
+
+            <p style="margin-top: 1rem;"><strong>2. Initialize with your App Key:</strong></p>
+            <pre><code>const sdk = new OrbinuitySDK('yourAppKey');</code></pre>
+        </div>
+
+        <div class="card">
+            <h2>API Methods</h2>
+
+            <h3 style="margin-top: 1rem; color: var(--accent);"><code>getUserInfo()</code></h3>
+            <p style="color: var(--dark-text);">Fetches the profile info of the currently logged-in user.</p>
+            <pre><code>const user = await sdk.getUserInfo();</code></pre>
+
+            <h3 style="margin-top: 1.5rem; color: var(--accent);"><code>get()</code></h3>
+            <p style="color: var(--dark-text);">Retrieves stored JSON data associated with your <code>appKey</code> for the user.</p>
+            <pre><code>const data = await sdk.get();</code></pre>
+
+            <h3 style="margin-top: 1.5rem; color: var(--accent);"><code>save(payload)</code></h3>
+            <p style="color: var(--dark-text);">Saves or updates a JSON object for your <code>appKey</code> on the user's account.</p>
+            <pre><code>await sdk.save({ score: 1250, level: 4 });</code></pre>
+        </div>
+
+        <div class="card">
+            <h2>User Profile Schema</h2>
+            <p style="color: var(--dark-text); margin-bottom: 1rem;">Structure returned by <code>getUserInfo()</code>:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Field</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>id</code></td>
+                        <td>string</td>
+                        <td>Unique user account ID timestamp.</td>
+                    </tr>
+                    <tr>
+                        <td><code>username</code></td>
+                        <td>string</td>
+                        <td>Unique account username handle.</td>
+                    </tr>
+                    <tr>
+                        <td><code>displayName</code></td>
+                        <td>string</td>
+                        <td>Public display name.</td>
+                    </tr>
+                    <tr>
+                        <td><code>age</code></td>
+                        <td>number | null</td>
+                        <td>User age (if provided).</td>
+                    </tr>
+                    <tr>
+                        <td><code>pronouns</code></td>
+                        <td>string | null</td>
+                        <td>Preferred pronouns (if provided).</td>
+                    </tr>
+                    <tr>
+                        <td><code>country</code></td>
+                        <td>string | null</td>
+                        <td>Country code or name (if provided).</td>
+                    </tr>
+                    <tr>
+                        <td><code>createdAt</code></td>
+                        <td>string</td>
+                        <td>ISO creation timestamp.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h2>Complete Implementation Example</h2>
+            <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;3rd Party App&lt;/title&gt;
+    &lt;script src="https://orbinuity.nl/api/sdk.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;h1 id="user-display"&gt;Loading...&lt;/h1&gt;
+    &lt;button onclick="saveProgress()"&gt;Save High Score&lt;/button&gt;
+
+    &lt;script&gt;
+        const sdk = new OrbinuitySDK('myGameApp');
+
+        async function init() {
+            try {
+                // Fetch User Profile
+                const user = await sdk.getUserInfo();
+                document.getElementById('user-display').textContent = `Welcome, ${user.displayName}!`;
+
+                // Fetch App Data
+                const gameData = await sdk.get();
+                if (gameData) {
+                    console.log('Restored score:', gameData.score);
+                }
+            } catch (err) {
+                document.window.open('https://orbinuity.nl/account/login', '_blank')
+            }
+        }
+
+        async function saveProgress() {
+            try {
+                await sdk.save({ score: 5000, level: 10 });
+                alert('Saved to Orbinuity account!');
+            } catch (err) {
+                alert('Save failed: ' + err.message);
+            }
+        }
+
+        init();
+    &lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        </div>
+    </section>
+</main>
+
+<div id="footer"></div>
+
+<script src="/script.js"></script>
+
+</body>
+</html>
