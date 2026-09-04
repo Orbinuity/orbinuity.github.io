@@ -1,32 +1,53 @@
-async function login(event) {
-    event.preventDefault();
+function getTokenCookie() {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; token=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return null;
+}
 
-    const errorElement = document.getElementById('error-msg');
-    errorElement.textContent = '';
+if (getTokenCookie()) {
+    window.location.href = '/account/index.html';
+}
 
-    const username = document.getElementById('username').value.trim();
-    const password = document.getElementById('password').value;
+const API_BASE = 'https://api.orbinuity.nl:34430';
 
-    try {
-        const res = await fetch('https://api.orbinuity.nl:34430/api/auth/login', {
-            method: 'POST',
-            headers: { 
-                'Content-Type': 'application/json' 
-            },
-            body: JSON.stringify({ username, password })
-        });
+function initLogin() {
+    const loginForm = document.querySelector('form');
+    if (!loginForm) return;
 
-        const data = await res.json();
+    loginForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
 
-        if (!res.ok) {
-            throw new Error(data.error || 'Login failed');
+        const errorElement = document.getElementById('error-msg');
+        if (errorElement) errorElement.textContent = '';
+
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value;
+
+        try {
+            const res = await fetch(`${API_BASE}/api/auth/login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) {
+                throw new Error(data.error || 'Login failed');
+            }
+
+            document.cookie = `token=${data.token}; path=/; max-age=604800; Secure; SameSite=Lax`;
+            window.location.href = '/account/index.html';
+
+        } catch (err) {
+            if (errorElement) errorElement.textContent = err.message;
         }
+    });
+}
 
-        document.cookie = `token=${data.token}; path=/; max-age=604800; Secure; SameSite=Lax`;
-
-        window.location.href = '/account';
-
-    } catch (err) {
-        errorElement.textContent = err.message;
-    }
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLogin);
+} else {
+    initLogin();
 }
