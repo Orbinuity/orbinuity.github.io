@@ -61,7 +61,6 @@
                 }, event.origin);
 
             } else if (action === 'save') {
-                // Save 3rd party app data
                 const res = await fetch(`https://api.orbinuity.nl:34430/api/external/${appKey}`, {
                     method: 'PUT',
                     headers: {
