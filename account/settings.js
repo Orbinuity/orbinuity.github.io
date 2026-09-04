@@ -5,7 +5,6 @@ function getTokenCookie() {
     return null;
 }
 
-// Populate both cards on page load
 document.addEventListener('DOMContentLoaded', async () => {
     const token = getTokenCookie();
 
@@ -25,13 +24,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || 'Failed to load profile');
 
-        // Pre-fill Card 1: User Info
         document.getElementById('displayName').value = data.displayName || '';
         document.getElementById('age').value = data.age || '';
         document.getElementById('pronouns').value = data.pronouns || '';
         document.getElementById('country').value = data.country || '';
 
-        // Pre-fill Card 2: Preferences
         if (data.settings) {
             document.getElementById('theme').value = data.settings.theme || 'dark';
             document.getElementById('notifications').checked = Boolean(data.settings.notifications);
@@ -44,7 +41,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
-// Handler for Card 1: Save User Info
 async function saveProfile(event) {
     event.preventDefault();
 
@@ -89,7 +85,6 @@ async function saveProfile(event) {
     }
 }
 
-// Handler for Card 2: Save Preferences
 async function savePreferences(event) {
     event.preventDefault();
 
