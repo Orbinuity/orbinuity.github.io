@@ -23,7 +23,6 @@ async function signup(event) {
             body: JSON.stringify(payload)
         });
 
-        // Ensure response is JSON before calling .json()
         const contentType = registerRes.headers.get('content-type');
         if (!contentType || !contentType.includes('application/json')) {
             throw new Error(`Server error (${registerRes.status}): ${registerRes.statusText}`);
@@ -32,15 +31,15 @@ async function signup(event) {
         const registerData = await registerRes.json();
 
         if (!registerRes.ok) {
-            // If Zod returned field-specific errors, extract the first error message
-            if (registerData.details && registerData.details.fieldErrors) {
-                const firstFieldError = Object.values(registerData.details.fieldErrors)[0]?.[0];
-                if (firstFieldError) throw new Error(firstFieldError);
+            if (registerData.details) {
+                const firstKey = Object.keys(registerData.details).find(k => k !== '_errors');
+                if (firstKey && registerData.details[firstKey]._errors?.[0]) {
+                    throw new Error(`${firstKey}: ${registerData.details[firstKey]._errors[0]}`);
+                }
             }
             throw new Error(registerData.error || 'Registration failed');
         }
 
-        // Auto-login
         const loginRes = await fetch('https://api.orbinuity.nl/api/auth/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
