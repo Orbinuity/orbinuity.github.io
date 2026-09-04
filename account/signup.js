@@ -1,13 +1,25 @@
-document.addEventListener('DOMContentLoaded', () => {
+function getTokenCookie() {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; token=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return null;
+}
+
+if (getTokenCookie()) {
+    window.location.href = '/account/index.html';
+}
+
+const API_BASE = 'https://api.orbinuity.nl:34430';
+
+function initSignup() {
     const signupForm = document.getElementById('signup-form');
     if (!signupForm) return;
 
     signupForm.addEventListener('submit', async (event) => {
         event.preventDefault();
-        console.log('Signup form submitted');
 
         const errorElement = document.getElementById('error-msg');
-        errorElement.textContent = '';
+        if (errorElement) errorElement.textContent = '';
 
         const username = document.getElementById('username').value.trim();
         const displayName = document.getElementById('displayName').value.trim();
@@ -21,21 +33,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (pronounsVal) payload.pronouns = pronounsVal;
         if (countryVal) payload.country = countryVal;
 
-        const API_BASE = 'https://api.orbinuity.nl:34430';
-
         try {
-            console.log('Sending registration payload:', payload);
-
             const registerRes = await fetch(`${API_BASE}/api/auth/register`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             });
-
-            const contentType = registerRes.headers.get('content-type');
-            if (!contentType || !contentType.includes('application/json')) {
-                throw new Error(`Server error (${registerRes.status}): ${registerRes.statusText}`);
-            }
 
             const registerData = await registerRes.json();
 
@@ -49,8 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 throw new Error(registerData.error || 'Registration failed');
             }
 
-            console.log('Registration successful, attempting auto-login...');
-
             const loginRes = await fetch(`${API_BASE}/api/auth/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -62,13 +63,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 throw new Error(loginData.error || 'Auto-login failed');
             }
 
-            console.log('Login successful, setting cookie...');
             document.cookie = `token=${loginData.token}; path=/; max-age=604800; Secure; SameSite=Lax`;
-            window.location.href = '/account/me.html';
+            window.location.href = '/account/index.html';
 
         } catch (err) {
-            console.error('Signup error:', err);
-            errorElement.textContent = err.message;
+            if (errorElement) errorElement.textContent = err.message;
         }
     });
-});
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSignup);
+} else {
+    initSignup();
+}
