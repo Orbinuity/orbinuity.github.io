@@ -1,60 +1,74 @@
-async function signup(event) {
-    event.preventDefault();
+document.addEventListener('DOMContentLoaded', () => {
+    const signupForm = document.getElementById('signup-form');
+    if (!signupForm) return;
 
-    const errorElement = document.getElementById('error-msg');
-    errorElement.textContent = '';
+    signupForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        console.log('Signup form submitted');
 
-    const username = document.getElementById('username').value.trim();
-    const displayName = document.getElementById('displayName').value.trim();
-    const password = document.getElementById('password').value;
-    const ageVal = document.getElementById('age').value;
-    const pronounsVal = document.getElementById('pronouns').value.trim();
-    const countryVal = document.getElementById('country').value.trim();
+        const errorElement = document.getElementById('error-msg');
+        errorElement.textContent = '';
 
-    const payload = { username, displayName, password };
-    if (ageVal) payload.age = parseInt(ageVal, 10);
-    if (pronounsVal) payload.pronouns = pronounsVal;
-    if (countryVal) payload.country = countryVal;
+        const username = document.getElementById('username').value.trim();
+        const displayName = document.getElementById('displayName').value.trim();
+        const password = document.getElementById('password').value;
+        const ageVal = document.getElementById('age').value;
+        const pronounsVal = document.getElementById('pronouns').value.trim();
+        const countryVal = document.getElementById('country').value.trim();
 
-    try {
-        const registerRes = await fetch('https://api.orbinuity.nl/api/auth/register', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-        });
+        const payload = { username, displayName, password };
+        if (ageVal) payload.age = parseInt(ageVal, 10);
+        if (pronounsVal) payload.pronouns = pronounsVal;
+        if (countryVal) payload.country = countryVal;
 
-        const contentType = registerRes.headers.get('content-type');
-        if (!contentType || !contentType.includes('application/json')) {
-            throw new Error(`Server error (${registerRes.status}): ${registerRes.statusText}`);
-        }
+        const API_BASE = 'https://api.orbinuity.nl:34430';
 
-        const registerData = await registerRes.json();
+        try {
+            console.log('Sending registration payload:', payload);
 
-        if (!registerRes.ok) {
-            if (registerData.details) {
-                const firstKey = Object.keys(registerData.details).find(k => k !== '_errors');
-                if (firstKey && registerData.details[firstKey]._errors?.[0]) {
-                    throw new Error(`${firstKey}: ${registerData.details[firstKey]._errors[0]}`);
-                }
+            const registerRes = await fetch(`${API_BASE}/api/auth/register`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            const contentType = registerRes.headers.get('content-type');
+            if (!contentType || !contentType.includes('application/json')) {
+                throw new Error(`Server error (${registerRes.status}): ${registerRes.statusText}`);
             }
-            throw new Error(registerData.error || 'Registration failed');
+
+            const registerData = await registerRes.json();
+
+            if (!registerRes.ok) {
+                if (registerData.details) {
+                    const firstKey = Object.keys(registerData.details).find(k => k !== '_errors');
+                    if (firstKey && registerData.details[firstKey]._errors?.[0]) {
+                        throw new Error(`${firstKey}: ${registerData.details[firstKey]._errors[0]}`);
+                    }
+                }
+                throw new Error(registerData.error || 'Registration failed');
+            }
+
+            console.log('Registration successful, attempting auto-login...');
+
+            const loginRes = await fetch(`${API_BASE}/api/auth/login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            });
+
+            const loginData = await loginRes.json();
+            if (!loginRes.ok) {
+                throw new Error(loginData.error || 'Auto-login failed');
+            }
+
+            console.log('Login successful, setting cookie...');
+            document.cookie = `token=${loginData.token}; path=/; max-age=604800; Secure; SameSite=Lax`;
+            window.location.href = '/account/me.html';
+
+        } catch (err) {
+            console.error('Signup error:', err);
+            errorElement.textContent = err.message;
         }
-
-        const loginRes = await fetch('https://api.orbinuity.nl/api/auth/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, password })
-        });
-
-        const loginData = await loginRes.json();
-        if (!loginRes.ok) {
-            throw new Error(loginData.error || 'Auto-login failed');
-        }
-
-        document.cookie = `token=${loginData.token}; path=/; max-age=604800; Secure; SameSite=Lax`;
-        window.location.href = '/account/me.html';
-
-    } catch (err) {
-        errorElement.textContent = err.message;
-    }
-}
+    });
+});
