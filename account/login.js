@@ -21,14 +21,14 @@ function initLogin() {
         const errorElement = document.getElementById('error-msg');
         if (errorElement) errorElement.textContent = '';
 
-        const username = document.getElementById('username').value.trim();
+        const identifier = document.getElementById('identifier').value.trim();
         const password = document.getElementById('password').value;
 
         try {
             const res = await fetch(`${API_BASE}/api/auth/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, password })
+                body: JSON.stringify({ identifier, password })
             });
 
             const data = await res.json();
