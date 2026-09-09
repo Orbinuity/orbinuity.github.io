@@ -36,7 +36,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('info-username').textContent = `@${data.username}`;
         document.getElementById('info-email').textContent = data.email || 'Not specified';
         document.getElementById('info-display-name').textContent = data.displayName || 'None';
-        document.getElementById('info-age').textContent = data.age ?? 'Not specified';
+        document.getElementById('info-account-type').textContent = data.settings?.isBusinessAccount ? 'Business Account' : 'Personal Account';
+        document.getElementById('info-dob').textContent = data.dateOfBirth || 'Not specified';
         document.getElementById('info-pronouns').textContent = data.pronouns || 'Not specified';
         document.getElementById('info-country').textContent = data.country || 'Not specified';
 
