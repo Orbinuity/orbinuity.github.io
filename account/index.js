@@ -1,3 +1,5 @@
+const API_BASE = 'https://api.orbinuity.nl:34430';
+
 function getTokenCookie() {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; token=`);
@@ -14,7 +16,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     try {
-        const res = await fetch('https://api.orbinuity.nl:34430/api/account/me', {
+        const res = await fetch(`${API_BASE}/api/account/me`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -30,6 +32,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('page-heading').textContent = `Welcome, ${data.displayName || data.username}`;
 
         document.getElementById('info-username').textContent = `@${data.username}`;
+        document.getElementById('info-email').textContent = data.email || 'Not specified';
         document.getElementById('info-display-name').textContent = data.displayName || 'None';
         document.getElementById('info-age').textContent = data.age ?? 'Not specified';
         document.getElementById('info-pronouns').textContent = data.pronouns || 'Not specified';
@@ -44,6 +47,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     } catch (err) {
         const errorMsg = document.getElementById('error-msg');
-        errorMsg.textContent = err.message;
+        if (errorMsg) errorMsg.textContent = err.message;
     }
 });
