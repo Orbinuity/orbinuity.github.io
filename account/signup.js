@@ -8,7 +8,7 @@ function getTokenCookie() {
 }
 
 if (getTokenCookie()) {
-    window.location.href = '/account/index.html';
+    window.location.href = '/account/index';
 }
 
 function initSignup() {
@@ -55,7 +55,7 @@ function initSignup() {
             }
 
             alert(registerData.message || 'Registration successful! Please check your email to verify your account.');
-            window.location.href = '/account/login.html';
+            window.location.href = '/account/login';
 
         } catch (err) {
             if (errorElement) errorElement.textContent = err.message;
