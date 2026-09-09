@@ -13,6 +13,7 @@
     
     --border: rgba(255, 255, 255, 0.05);
     --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
+    color-scheme: dark;
 }
 
 * {
@@ -187,7 +188,7 @@ form {
     max-width: 600px;
 }
 
-input,  textarea {
+input, textarea {
     padding: 1rem;
     border: 1px solid var(--bg-accent);
     border-radius: 6px;
@@ -198,7 +199,7 @@ input,  textarea {
     transition: all 0.3s ease;
 }
 
-input:focus,  textarea:focus {
+input:focus, textarea:focus {
     outline: none;
     border-color: var(--accent);
     box-shadow: 0 0 0 2px rgba(19, 96, 134, 0.3);
@@ -321,6 +322,7 @@ input[type="text"],
 input[type="email"],
 input[type="password"],
 input[type="number"],
+input[type="date"],
 textarea {
     padding: 0.85rem 1rem;
     border: 1px solid rgba(255, 255, 255, 0.1); 
@@ -330,6 +332,7 @@ textarea {
     font-family: inherit;
     font-size: 1rem;
     width: 100%;
+    display: block;
     transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
     outline: none;
     box-sizing: border-box;
@@ -344,10 +347,16 @@ input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="password"]:focus,
 input[type="number"]:focus,
+input[type="date"]:focus,
 textarea:focus {
     border-color: var(--accent);
     background-color: #333; 
     box-shadow: 0 0 0 3px rgba(19, 96, 134, 0.3); 
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    filter: invert(0.8);
 }
 
 input::placeholder, 
@@ -448,12 +457,14 @@ dialog p {
         
         --border: rgba(19, 96, 134, 0.15);
         --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+        color-scheme: light;
     }
 
     input[type="text"]:focus,
     input[type="email"]:focus,
     input[type="password"]:focus,
     input[type="number"]:focus,
+    input[type="date"]:focus,
     textarea:focus {
         background-color: #ffffff; 
         box-shadow: 0 0 0 3px rgba(19, 96, 134, 0.2); 
@@ -463,8 +474,13 @@ dialog p {
     input[type="email"],
     input[type="password"],
     input[type="number"],
+    input[type="date"],
     textarea {
         border: 1px solid rgba(0, 0, 0, 0.12);
+    }
+
+    input[type="date"]::-webkit-calendar-picker-indicator {
+        filter: invert(0.2);
     }
 
     .card:hover {
