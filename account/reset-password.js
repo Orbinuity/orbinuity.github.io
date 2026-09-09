@@ -7,7 +7,6 @@ function initResetPassword() {
     const requestForm = document.getElementById('request-reset-form');
     const submitForm = document.getElementById('submit-new-password-form');
 
-    // If token exists in URL, show new password form
     if (token) {
         if (requestForm) requestForm.style.display = 'none';
         if (submitForm) submitForm.style.display = 'flex';
@@ -50,7 +49,6 @@ function initResetPassword() {
         });
 
     } else {
-        // Default mode: Request reset link via email
         if (requestForm) {
             requestForm.addEventListener('submit', async (event) => {
                 event.preventDefault();
