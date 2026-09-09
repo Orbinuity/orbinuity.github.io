@@ -83,6 +83,8 @@ async function saveProfile(event) {
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || 'Failed to update profile.');
 
+        checkTermsConsent(data);
+
         msg.style.color = 'green';
         msg.textContent = 'User info saved successfully!';
 
