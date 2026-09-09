@@ -134,6 +134,54 @@ async function savePreferences(event) {
     }
 }
 
+async function changePassword(event) {
+    event.preventDefault();
+
+    const token = getTokenCookie();
+    const msg = document.getElementById('password-msg');
+    msg.textContent = '';
+
+    if (!token) {
+        window.location.href = '/account/login.html';
+        return;
+    }
+
+    const currentPassword = document.getElementById('currentPassword').value;
+    const newPassword = document.getElementById('newPassword').value;
+    const confirmNewPassword = document.getElementById('confirmNewPassword').value;
+
+    if (newPassword !== confirmNewPassword) {
+        msg.style.color = 'red';
+        msg.textContent = 'New passwords do not match.';
+        return;
+    }
+
+    try {
+        const res = await fetch(`${API_BASE}/api/account/change-password`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ currentPassword, newPassword })
+        });
+
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Failed to change password.');
+
+        msg.style.color = 'green';
+        msg.textContent = data.message;
+
+        document.getElementById('currentPassword').value = '';
+        document.getElementById('newPassword').value = '';
+        document.getElementById('confirmNewPassword').value = '';
+
+    } catch (err) {
+        msg.style.color = 'red';
+        msg.textContent = err.message;
+    }
+}
+
 async function deleteAccount() {
     const confirmed = confirm('Are you sure you want to delete your account? This action is permanent and cannot be undone.');
     if (!confirmed) return;
