@@ -1,3 +1,5 @@
+const API_BASE = 'https://api.orbinuity.nl:34430';
+
 function getTokenCookie() {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; token=`);
@@ -14,7 +16,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     try {
-        const res = await fetch('https://api.orbinuity.nl:34430/api/account/me', {
+        const res = await fetch(`${API_BASE}/api/account/me`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -25,19 +27,22 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (!res.ok) throw new Error(data.error || 'Failed to load profile');
 
         document.getElementById('displayName').value = data.displayName || '';
+        document.getElementById('email').value = data.email || '';
         document.getElementById('age').value = data.age || '';
         document.getElementById('pronouns').value = data.pronouns || '';
         document.getElementById('country').value = data.country || '';
 
         if (data.settings) {
             document.getElementById('theme').value = data.settings.theme || 'dark';
-            document.getElementById('notifications').checked = Boolean(data.settings.notifications);
+            document.getElementById('twoFactorEnabled').checked = Boolean(data.settings.twoFactorEnabled);
         }
 
     } catch (err) {
         const profileMsg = document.getElementById('profile-msg');
-        profileMsg.style.color = 'red';
-        profileMsg.textContent = err.message;
+        if (profileMsg) {
+            profileMsg.style.color = 'red';
+            profileMsg.textContent = err.message;
+        }
     }
 });
 
@@ -54,12 +59,13 @@ async function saveProfile(event) {
     }
 
     const displayName = document.getElementById('displayName').value.trim();
+    const email = document.getElementById('email').value.trim();
     const ageVal = document.getElementById('age').value;
     const pronounsVal = document.getElementById('pronouns').value.trim();
     const countryVal = document.getElementById('country').value.trim();
 
     try {
-        const res = await fetch('https://api.orbinuity.nl:34430/api/account/profile', {
+        const res = await fetch(`${API_BASE}/api/account/profile`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -67,6 +73,7 @@ async function saveProfile(event) {
             },
             body: JSON.stringify({
                 displayName,
+                email,
                 age: ageVal ? parseInt(ageVal, 10) : null,
                 pronouns: pronounsVal || null,
                 country: countryVal || null
@@ -98,10 +105,10 @@ async function savePreferences(event) {
     }
 
     const theme = document.getElementById('theme').value;
-    const notifications = document.getElementById('notifications').checked;
+    const twoFactorEnabled = document.getElementById('twoFactorEnabled').checked;
 
     try {
-        const res = await fetch('https://api.orbinuity.nl:34430/api/account/settings', {
+        const res = await fetch(`${API_BASE}/api/account/settings`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -110,7 +117,7 @@ async function savePreferences(event) {
             body: JSON.stringify({
                 settings: {
                     theme,
-                    notifications
+                    twoFactorEnabled
                 }
             })
         });
@@ -124,5 +131,35 @@ async function savePreferences(event) {
     } catch (err) {
         msg.style.color = 'red';
         msg.textContent = err.message;
+    }
+}
+
+async function deleteAccount() {
+    const confirmed = confirm('Are you sure you want to delete your account? This action is permanent and cannot be undone.');
+    if (!confirmed) return;
+
+    const token = getTokenCookie();
+    if (!token) {
+        window.location.href = '/account/login.html';
+        return;
+    }
+
+    try {
+        const res = await fetch(`${API_BASE}/api/account/me`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Failed to delete account.');
+
+        document.cookie = 'token=; path=/; max-age=0; Secure; SameSite=Lax';
+        alert('Your account has been permanently deleted.');
+        window.location.href = '/account/signup.html';
+
+    } catch (err) {
+        alert(err.message);
     }
 }
