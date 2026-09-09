@@ -39,7 +39,7 @@ function initResetPassword() {
                 msgElement.textContent = data.message;
 
                 setTimeout(() => {
-                    window.location.href = '/account/login.html';
+                    window.location.href = '/account/login';
                 }, 2000);
 
             } catch (err) {
