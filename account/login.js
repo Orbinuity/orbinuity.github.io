@@ -9,7 +9,7 @@ function getTokenCookie() {
 }
 
 if (getTokenCookie()) {
-    window.location.href = '/account/index.html';
+    window.location.href = '/account/index';
 }
 
 function initLogin() {
@@ -35,7 +35,7 @@ function initLogin() {
                 if (!res.ok) throw new Error(data.error || '2FA Verification failed.');
 
                 document.cookie = `token=${data.token}; path=/; max-age=604800; Secure; SameSite=Lax`;
-                window.location.href = '/account/index.html';
+                window.location.href = '/account/index';
             } catch (err) {
                 if (errorElement) errorElement.textContent = err.message;
             }
@@ -64,7 +64,7 @@ function initLogin() {
             }
 
             document.cookie = `token=${data.token}; path=/; max-age=604800; Secure; SameSite=Lax`;
-            window.location.href = '/account/index.html';
+            window.location.href = '/account/index';
 
         } catch (err) {
             if (errorElement) errorElement.textContent = err.message;
