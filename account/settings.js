@@ -18,9 +18,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     try {
         const res = await fetch(`${API_BASE}/api/account/me`, {
             method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
+            headers: { 'Authorization': `Bearer ${token}` }
         });
 
         const data = await res.json();
@@ -28,13 +26,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         document.getElementById('displayName').value = data.displayName || '';
         document.getElementById('email').value = data.email || '';
-        document.getElementById('age').value = data.age || '';
+        document.getElementById('dateOfBirth').value = data.dateOfBirth || '';
         document.getElementById('pronouns').value = data.pronouns || '';
         document.getElementById('country').value = data.country || '';
 
         if (data.settings) {
-            document.getElementById('theme').value = data.settings.theme || 'dark';
+            document.getElementById('isBusinessAccount').checked = Boolean(data.settings.isBusinessAccount);
             document.getElementById('twoFactorEnabled').checked = Boolean(data.settings.twoFactorEnabled);
+            document.getElementById('marketingEmails').checked = Boolean(data.settings.marketingEmails);
         }
 
     } catch (err) {
@@ -60,7 +59,7 @@ async function saveProfile(event) {
 
     const displayName = document.getElementById('displayName').value.trim();
     const email = document.getElementById('email').value.trim();
-    const ageVal = document.getElementById('age').value;
+    const dateOfBirthVal = document.getElementById('dateOfBirth').value;
     const pronounsVal = document.getElementById('pronouns').value.trim();
     const countryVal = document.getElementById('country').value.trim();
 
@@ -74,7 +73,7 @@ async function saveProfile(event) {
             body: JSON.stringify({
                 displayName,
                 email,
-                age: ageVal ? parseInt(ageVal, 10) : null,
+                dateOfBirth: dateOfBirthVal || null,
                 pronouns: pronounsVal || null,
                 country: countryVal || null
             })
@@ -82,8 +81,6 @@ async function saveProfile(event) {
 
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || 'Failed to update profile.');
-
-        checkTermsConsent(data);
 
         msg.style.color = 'green';
         msg.textContent = 'User info saved successfully!';
@@ -106,8 +103,9 @@ async function savePreferences(event) {
         return;
     }
 
-    const theme = document.getElementById('theme').value;
+    const isBusinessAccount = document.getElementById('isBusinessAccount').checked;
     const twoFactorEnabled = document.getElementById('twoFactorEnabled').checked;
+    const marketingEmails = document.getElementById('marketingEmails').checked;
 
     try {
         const res = await fetch(`${API_BASE}/api/account/settings`, {
@@ -118,8 +116,9 @@ async function savePreferences(event) {
             },
             body: JSON.stringify({
                 settings: {
-                    theme,
-                    twoFactorEnabled
+                    isBusinessAccount,
+                    twoFactorEnabled,
+                    marketingEmails
                 }
             })
         });
@@ -197,9 +196,7 @@ async function deleteAccount() {
     try {
         const res = await fetch(`${API_BASE}/api/account/me`, {
             method: 'DELETE',
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
+            headers: { 'Authorization': `Bearer ${token}` }
         });
 
         const data = await res.json();
