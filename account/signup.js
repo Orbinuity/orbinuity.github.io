@@ -28,8 +28,9 @@ function initSignup() {
         const ageVal = document.getElementById('age').value;
         const pronounsVal = document.getElementById('pronouns').value.trim();
         const countryVal = document.getElementById('country').value.trim();
+        const acceptedTerms = document.getElementById('acceptedTerms').checked;
 
-        const payload = { username, email, displayName, password };
+        const payload = { username, email, displayName, password, acceptedTerms };
         if (ageVal) payload.age = parseInt(ageVal, 10);
         if (pronounsVal) payload.pronouns = pronounsVal;
         if (countryVal) payload.country = countryVal;
