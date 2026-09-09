@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const token = getTokenCookie();
 
     if (!token) {
-        window.location.href = '/account/login.html';
+        window.location.href = '/account/login';
         return;
     }
 
@@ -53,7 +53,7 @@ async function saveProfile(event) {
     msg.textContent = '';
 
     if (!token) {
-        window.location.href = '/account/login.html';
+        window.location.href = '/account/login';
         return;
     }
 
@@ -99,7 +99,7 @@ async function savePreferences(event) {
     msg.textContent = '';
 
     if (!token) {
-        window.location.href = '/account/login.html';
+        window.location.href = '/account/login';
         return;
     }
 
@@ -143,7 +143,7 @@ async function changePassword(event) {
     msg.textContent = '';
 
     if (!token) {
-        window.location.href = '/account/login.html';
+        window.location.href = '/account/login';
         return;
     }
 
@@ -189,7 +189,7 @@ async function deleteAccount() {
 
     const token = getTokenCookie();
     if (!token) {
-        window.location.href = '/account/login.html';
+        window.location.href = '/account/login';
         return;
     }
 
@@ -204,7 +204,7 @@ async function deleteAccount() {
 
         document.cookie = 'token=; path=/; max-age=0; Secure; SameSite=Lax';
         alert('Your account has been permanently deleted.');
-        window.location.href = '/account/signup.html';
+        window.location.href = '/account/signup';
 
     } catch (err) {
         alert(err.message);
