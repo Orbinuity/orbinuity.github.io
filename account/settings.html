@@ -28,8 +28,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="age">Age</label>
-                    <input type="number" id="age" min="1" max="120">
+                    <label for="dateOfBirth">Date of Birth</label>
+                    <input type="date" id="dateOfBirth">
                 </div>
 
                 <div class="form-group">
@@ -39,7 +39,7 @@
 
                 <div class="form-group">
                     <label for="country">Country</label>
-                    <input type="text" id="country" placeholder="e.g. NL, US">
+                    <input type="text" id="country" placeholder="e.g. Netherlands, United States">
                 </div>
 
                 <p id="profile-msg" style="margin-top: 15px;"></p>
@@ -51,17 +51,19 @@
         <div class="card" style="margin-bottom: 20px;">
             <h2>Preferences & Security</h2>
             <form onsubmit="savePreferences(event)">
-                <div class="form-group">
-                    <label for="theme">Theme</label>
-                    <select id="theme">
-                        <option value="dark">Dark</option>
-                        <option value="light">Light</option>
-                    </select>
+                <div class="form-group" style="display: flex; align-items: center; gap: 10px;">
+                    <input type="checkbox" id="isBusinessAccount" style="width: auto;">
+                    <label for="isBusinessAccount" style="margin: 0;">Mark account as Business Account</label>
                 </div>
 
                 <div class="form-group" style="display: flex; align-items: center; gap: 10px;">
-                    <input type="checkbox" id="twoFactorEnabled">
+                    <input type="checkbox" id="twoFactorEnabled" style="width: auto;">
                     <label for="twoFactorEnabled" style="margin: 0;">Enable 2-Factor Authentication (Email Verification)</label>
+                </div>
+
+                <div class="form-group" style="display: flex; align-items: center; gap: 10px;">
+                    <input type="checkbox" id="marketingEmails" style="width: auto;">
+                    <label for="marketingEmails" style="margin: 0;">Receive promotional updates and marketing emails</label>
                 </div>
 
                 <p id="settings-msg" style="margin-top: 15px;"></p>
