@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const token = getTokenCookie();
 
     if (!token) {
-        window.location.href = '/account/login.html';
+        window.location.href = '/account/login';
         return;
     }
 
