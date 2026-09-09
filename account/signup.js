@@ -25,13 +25,13 @@ function initSignup() {
         const email = document.getElementById('email').value.trim();
         const displayName = document.getElementById('displayName').value.trim();
         const password = document.getElementById('password').value;
-        const ageVal = document.getElementById('age').value;
-        const pronounsVal = document.getElementById('pronouns').value.trim();
+        const dobVal = document.getElementById('dateOfBirth').value;
         const countryVal = document.getElementById('country').value.trim();
+        const pronounsVal = document.getElementById('pronouns').value.trim();
         const acceptedTerms = document.getElementById('acceptedTerms').checked;
 
         const payload = { username, email, displayName, password, acceptedTerms };
-        if (ageVal) payload.age = parseInt(ageVal, 10);
+        if (dobVal) payload.dateOfBirth = parseInt(dobVal, 10);
         if (pronounsVal) payload.pronouns = pronounsVal;
         if (countryVal) payload.country = countryVal;
 
