@@ -22,7 +22,6 @@ function initLogin() {
         const errorElement = document.getElementById('error-msg');
         if (errorElement) errorElement.textContent = '';
 
-        // Step 2: Verification of 2FA Code
         if (pendingUserId) {
             const code = document.getElementById('twoFactorCode').value.trim();
             try {
@@ -43,7 +42,6 @@ function initLogin() {
             return;
         }
 
-        // Step 1: Normal Credentials Check
         const identifier = document.getElementById('identifier').value.trim();
         const password = document.getElementById('password').value;
 
