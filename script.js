@@ -27,8 +27,8 @@ async function checkTermsConsent(userData) {
                 We have updated our Terms of Service and Privacy Policy. You must review and accept the changes to continue using your account.
             </p>
             <p style="margin-bottom: 20px;">
-                <a href="/terms.html" target="_blank">Terms of Service</a> | 
-                <a href="/privacy.html" target="_blank">Privacy Policy</a>
+                <a href="/terms" target="_blank">Terms of Service</a> | 
+                <a href="/privacy" target="_blank">Privacy Policy</a>
             </p>
             <button id="accept-terms-btn">I Agree & Continue</button>
         `;
