@@ -29,6 +29,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             throw new Error(data.error || 'Failed to load profile.');
         }
 
+        checkTermsConsent(data);
+
         document.getElementById('page-heading').textContent = `Welcome, ${data.displayName || data.username}`;
 
         document.getElementById('info-username').textContent = `@${data.username}`;
