@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || 'Failed to load profile');
 
+        document.getElementById('username').value = data.username || '';
         document.getElementById('displayName').value = data.displayName || '';
         document.getElementById('email').value = data.email || '';
         document.getElementById('dateOfBirth').value = data.dateOfBirth || '';
@@ -57,6 +58,7 @@ async function saveProfile(event) {
         return;
     }
 
+    const username = document.getElementById('username').value.trim();
     const displayName = document.getElementById('displayName').value.trim();
     const email = document.getElementById('email').value.trim();
     const dateOfBirthVal = document.getElementById('dateOfBirth').value;
@@ -71,6 +73,7 @@ async function saveProfile(event) {
                 'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({
+                username,
                 displayName,
                 email,
                 dateOfBirth: dateOfBirthVal || null,
