@@ -1,4 +1,5 @@
 {
+    "AdaptiveCaseManagement": ["Adaptive Case Management", "A customizable workspace for organizing cases and detailed information blocks.", [["https://acm.orbinuity.nl", "Website"]]],
     "AiMan": ["AiMan", "Run and handel AMA models", []],
     "BillboardShow": ["Billboard Show", "Make very simple Billboards or Info boards!", []],
     "DispenserSpear": ["Dispenser Spear", "Make dispensers use spears like a weapon!", [["https://www.curseforge.com/minecraft/mc-mods/dispenser-spear", "Download on Forge"], ["https://modrinth.com/mod/dispenser-spear", "Download on Modrinth"]]],
@@ -7,7 +8,9 @@
     "Museay": ["Museay", "A music player", []],
     "NuclearPowerPlantSimulator": ["Nuclear Power Plant Simulator", "An nuclear power plant simulator", []],
     "objRenderer": ["obj Renderer", "Spin or move 3d obj files the terminal", []],
+    "OrbinuityPy": ["Orbinuity Py", "A small python library used by Orbinuity projects", []],
     "orbo": ["Orbo", "A way to be together!", [["https://orbo.orbinuity.nl", "Website"]]],
     "pyneltuya": ["PyNelTuya", "Control Tuya matrix lights with python", [["https://pypi.org/p/PyNelTuya", "PyPi"]]],
-    "RoonWebUI": ["Roon Web UI", "Roon Extension to create a web ui.", []]
+    "RoonWebUI": ["Roon Web UI", "Roon Extension to create a web ui.", []],
+    "Roosterly": ["Roosterly", "A easy school planner!", [["https://roosterly.orbinuity.nl", "Website"]]]
 }
